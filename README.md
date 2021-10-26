@@ -1,5 +1,5 @@
 <h1 align="center">
- <img src="assets/HomeCare.PNG" />
+ <img src="assets/HomeCare.png" />
 </h1>
 
 <p align="center">
