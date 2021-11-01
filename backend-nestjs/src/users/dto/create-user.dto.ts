@@ -1,3 +1,8 @@
+export class ScheduleDto {
+  week_day: number;
+  from: number;
+  to: number;
+}
 export class CreateUserDto {
   firstName: string;
   lastName: string;
@@ -6,4 +11,6 @@ export class CreateUserDto {
   avatar: string;
   phone: string;
   bio: string;
+
+  schedules: ScheduleDto[];
 }
