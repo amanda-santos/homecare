@@ -30,7 +30,7 @@
 
 <p>HomeCare is an application with the goal of helping families to find caregivers specialized in helping patients, such as children and elders, on day-to-day life.</p>
 
-## 📝 Available Languages
+## ⚙ Available Languages
 
 <p>pt-BR: ✅ Available
 <br />EN: 💬 In Progress</p>
