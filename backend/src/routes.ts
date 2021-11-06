@@ -8,6 +8,9 @@ const caregiversController = new CaregiversController();
 const connectionsController = new ConnectionsController();
 
 routes.get("/caregivers", caregiversController.index);
+routes.get("/caregivers/:id/patients", caregiversController.indexPatients);
+routes.get("/caregivers/:id/schedule", caregiversController.indexSchedule);
+
 routes.post("/caregivers", caregiversController.create);
 
 routes.get("/connections", connectionsController.index);

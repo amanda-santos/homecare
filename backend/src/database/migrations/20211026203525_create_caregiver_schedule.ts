@@ -6,8 +6,8 @@ export async function up(knex: Knex) {
     table.increments("id").primary();
 
     table.integer("week_day").notNullable();
-    table.integer("from").notNullable();
-    table.integer("to").notNullable();
+    table.integer("from_time").notNullable();
+    table.integer("to_time").notNullable();
 
     table
       .integer("caregiver_id")

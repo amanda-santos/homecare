@@ -39,47 +39,55 @@ export default class CaregiversController {
 
     const result = await db("users")
       .innerJoin("caregivers", "users.id", "caregivers.user_id")
-      .innerJoin(
-        "caregiver_schedule",
-        "caregivers.id",
-        "caregiver_schedule.caregiver_id"
-      )
-      .innerJoin(
-        "caregiver_patient",
-        "caregivers.id",
-        "caregiver_patient.caregiver_id"
-      )
-      .innerJoin("patients", "caregiver_patient.patient_id", "patients.id")
-      .where("caregiver_schedule.week_day", Number(week_day))
-      .where("caregiver_schedule.from_time", "<=", timeInMinutes)
-      .where("caregiver_schedule.to_time", ">", timeInMinutes)
       .whereExists(function () {
         this.select("*")
-          .from("users")
-          .innerJoin("caregivers", "users.id", "caregivers.user_id")
-          .innerJoin(
-            "caregiver_schedule",
-            "caregivers.id",
-            "caregiver_schedule.caregiver_id"
-          )
-          .innerJoin(
-            "caregiver_patient",
-            "caregivers.id",
-            "caregiver_patient.caregiver_id"
-          )
-          .whereIn("patient_id", patients);
+          .from("caregiver_patient")
+          .whereIn("patient_id", patients)
+          .where("caregiver_id", db.ref("caregivers.user_id"));
       })
-      .select("*");
+      .whereExists(function () {
+        this.select("*")
+          .from("caregiver_schedule")
+          .where("caregiver_schedule.week_day", Number(week_day))
+          .where("caregiver_schedule.from_time", "<=", timeInMinutes)
+          .where("caregiver_schedule.to_time", ">", timeInMinutes)
+          .where("caregiver_id", db.ref("caregivers.user_id"));
+      })
+      .select("caregivers.id as caregiverId", "users.*");
 
-    const caregivers = result.map((caregiver) => {
+    return response.send(result);
+  }
+
+  async indexPatients(request: Request, response: Response) {
+    const id = request.params.id;
+
+    const result = await db("users")
+      .select("patient_id")
+      .from("caregiver_patient")
+      .where("caregiver_id", parseInt(id));
+
+    const patients = result.map((res) => res.patient_id);
+
+    return response.send(patients);
+  }
+
+  async indexSchedule(request: Request, response: Response) {
+    const id = request.params.id;
+
+    const schedule = await db("users")
+      .select("week_day", "from_time", "to_time")
+      .from("caregiver_schedule")
+      .where("caregiver_id", parseInt(id));
+
+    const formattedSchedule = schedule.map((scheduleObject) => {
       return {
-        ...caregiver,
-        from_time: convertMinutesToHoursMinutes(caregiver.from_time),
-        to_time: convertMinutesToHoursMinutes(caregiver.to_time),
+        ...scheduleObject,
+        from_time: convertMinutesToHoursMinutes(scheduleObject.from_time),
+        to_time: convertMinutesToHoursMinutes(scheduleObject.to_time),
       };
     });
 
-    return response.send(caregivers);
+    return response.send(formattedSchedule);
   }
 
   async create(request: Request, response: Response) {
@@ -110,12 +118,10 @@ export default class CaregiversController {
       });
 
       const user_id = insertedUsersIds[0];
-
       const insertedCaregiversIds = await trx("caregivers").insert({
         cost,
         user_id,
       });
-
       const caregiver_id = insertedCaregiversIds[0];
 
       const caregiverSchedule = schedule.map((scheduleItem: ScheduleItem) => {
@@ -126,7 +132,6 @@ export default class CaregiversController {
           to_time: convertHourToMinutes(scheduleItem.to_time),
         };
       });
-
       await trx("caregiver_schedule").insert(caregiverSchedule);
 
       const caregiverPatient = patients.map((patient_id: number) => {
@@ -135,9 +140,7 @@ export default class CaregiversController {
           patient_id,
         };
       });
-
       await trx("caregiver_patient").insert(caregiverPatient);
-
       await trx.commit();
 
       return response.status(201).send();

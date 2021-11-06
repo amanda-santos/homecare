@@ -39,17 +39,28 @@
 
 Technologies used to develop this project:
 
-- NestJS
-- TypeORM
 - Next.js
+- React
 - React Native
 - Expo
 - TypeScript
-- MySQL
+- Styled Components
+- Node.js
+- Knex
+- SQLite
+
+- NestJS (partially - only experimental)
 
 ## ⌨ Getting started
 
 Running the backend:
+
+- Inside the backend folder, run `npm i` or `yarn` to install the dependencies
+- Run `npm run knex:migrate` or `yarn knex:migrate` to run the migrations
+- Run `npm run knex seed:run` or `yarn knex seed:run` to populate the databases
+- Run the server with `npm start` or `yarn start`
+
+Running the backend-nestjs (partial project - only experimental):
 
 - Inside the backend folder, run `npm i` or `yarn` to install the dependencies
 - Change `ormconfig.json`, adding the setup of your MySQL database
