@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakingPointPx } from "../../styles/constants";
+import { breakingPointPx } from "../../../styles/constants";
 
 export const HomeWrapper = styled.div`
   height: 100vh;
