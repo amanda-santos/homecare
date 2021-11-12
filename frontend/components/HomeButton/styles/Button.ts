@@ -8,8 +8,7 @@ export const Button = styled.button<Props>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  padding: 3.2rem 1.6rem;
+  padding: 1.2rem;
 
   width: 14.4rem;
   height: 16rem;
@@ -17,10 +16,40 @@ export const Button = styled.button<Props>`
   text-align: left;
   color: var(--white);
   font-weight: 700;
-  font-size: 1.6rem;
 
   border: none;
   border-radius: 0.5rem;
   background-color: ${({ $color }) =>
     $color === "primary" ? "var(--primary)" : "var(--secondary)"};
+  transition: all 500ms ease;
+  opacity: 1;
+
+  span {
+    margin-top: 0.8rem;
+  }
+
+  p {
+    margin-bottom: 0.8rem;
+    font-size: 2rem;
+  }
+
+  &:hover {
+    background-color: var(--white);
+    box-shadow: 0 0 0 2px
+      ${({ $color }) =>
+        $color === "primary" ? "var(--primary)" : "var(--secondary)"};
+
+    p,
+    span {
+      color: ${({ $color }) =>
+        $color === "primary" ? "var(--primary)" : "var(--secondary)"};
+    }
+
+    /* filter: brightness(0.9); */
+
+    /* span,
+    p {
+      filter: brightness(1);
+    } */
+  }
 `;

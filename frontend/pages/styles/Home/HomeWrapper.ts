@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakingPointPx } from "../../styles/constants";
 
 export const HomeWrapper = styled.div`
   height: 100vh;
@@ -10,5 +11,12 @@ export const HomeWrapper = styled.div`
 
   img {
     height: 100vh;
+    display: block;
+  }
+
+  @media (max-width: ${breakingPointPx.lg}) {
+    img {
+      display: none;
+    }
   }
 `;
