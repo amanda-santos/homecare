@@ -44,12 +44,5 @@ export const Button = styled.button<Props>`
       color: ${({ $color }) =>
         $color === "primary" ? "var(--primary)" : "var(--secondary)"};
     }
-
-    /* filter: brightness(0.9); */
-
-    /* span,
-    p {
-      filter: brightness(1);
-    } */
   }
 `;
