@@ -1,0 +1,1 @@
+export { MainTitleWrapper } from "./MainTitleWrapper";

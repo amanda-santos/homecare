@@ -1,16 +1,34 @@
 import React, { useState } from "react";
-import { Logo } from "..";
-// import Image from "next/image";
-// import Link from "next/link";
+import Image from "next/image";
+import Link from "next/link";
 
-import { Header as HeaderWrapper } from "./Header";
+import { HeaderWrapper, Logo } from "./styles";
 
 type Props = {};
 
 export const Header = ({}: Props) => {
+  const [isHovering, setIsHovering] = useState(false);
+
   return (
     <HeaderWrapper>
-      <Logo />
+      <Link href="/">
+        <a
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
+          <Image
+            src={
+              isHovering
+                ? `/images/arrow-left-hover.svg`
+                : `/images/arrow-left.svg`
+            }
+            alt="Go back"
+            width="48"
+            height="96"
+          />
+        </a>
+      </Link>
+      <Logo>homecare</Logo>
     </HeaderWrapper>
   );
 };

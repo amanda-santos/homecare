@@ -22,7 +22,6 @@ export const Button = styled.button<Props>`
   background-color: ${({ $color }) =>
     $color === "primary" ? "var(--primary)" : "var(--secondary)"};
   transition: all 500ms ease;
-  opacity: 1;
 
   span {
     margin-top: 0.8rem;

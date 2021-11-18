@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { NextPage } from "next";
-import { Logo } from "../components";
-import { HomeButton } from "../components/HomeButton";
+import { Logo, HomeButton } from "../components";
 import { HomeWrapper, ButtonsWrapper, SideContent } from "./styles/Home";
 
 const Home: NextPage = () => {

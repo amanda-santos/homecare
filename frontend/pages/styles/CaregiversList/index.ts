@@ -1,1 +1,1 @@
-export { CaregiversListWrapper } from "./CaregiversListWrapper";
+export { CaregiversWrapper } from "./CaregiversWrapper";

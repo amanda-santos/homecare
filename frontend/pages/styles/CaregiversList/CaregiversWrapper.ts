@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CaregiversListWrapper = styled.div`
+export const CaregiversWrapper = styled.div`
   height: 100vh;
   margin: 0 auto;
   display: flex;

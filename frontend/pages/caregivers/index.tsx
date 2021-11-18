@@ -1,12 +1,13 @@
 import type { NextPage } from "next";
-import { Header } from "../../components/Header";
-import { CaregiversListWrapper } from "../styles/CaregiversList";
+import { Header, MainTitle } from "../../components";
+import { CaregiversWrapper } from "../styles/CaregiversList";
 
 const Caregivers: NextPage = () => {
   return (
-    <CaregiversListWrapper>
+    <CaregiversWrapper>
       <Header />
-    </CaregiversListWrapper>
+      <MainTitle title="Estes são os cuidadores disponíveis." showFilters />
+    </CaregiversWrapper>
   );
 };
 
