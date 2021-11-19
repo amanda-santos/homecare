@@ -20,11 +20,4 @@ export const CaregiverWrapper = styled.div`
     height: 8rem;
     border-radius: 50%;
   }
-
-  p {
-    font-size: 1.6rem;
-    line-height: 2.6rem;
-    color: var(--text);
-    font-weight: 300;
-  }
 `;

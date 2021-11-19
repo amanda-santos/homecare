@@ -1,29 +1,38 @@
 export enum PatientType {
-  1 = "baby",
-  2 = "child",
-  3 = "teen",
-  4 = "elder",
-  5 = "sick",
-  6 = "disabled",
+  "baby",
+  "child",
+  "teen",
+  "elder",
+  "sick",
+  "disabled",
 }
 
 export enum PatientTitle {
-  1 = "Bebês",
-  2 = "Crianças",
-  3 = "Adolescentes",
-  4 = "Idosos",
-  5 = "Enfermos",
-  6 = "PcD",
+  "Bebês",
+  "Crianças",
+  "Adolescentes",
+  "Idosos",
+  "Enfermos",
+  "PcD",
+}
+
+export enum PatientEmoji {
+  "👶🏾",
+  "👧🏻",
+  "👩🏽",
+  "👴🏻",
+  "🤒",
+  "♿",
 }
 
 export enum WeekDay {
-  0 = "Domingo",
-  1 = "Segunda",
-  2 = "Terça",
-  3 = "Quarta",
-  4 = "Quinta",
-  5 = "Sexta",
-  6 = "Sábado",
+  "Domingo",
+  "Segunda",
+  "Terça",
+  "Quarta",
+  "Quinta",
+  "Sexta",
+  "Sábado",
 }
 
 export type Caregiver = {
@@ -37,17 +46,16 @@ export type Caregiver = {
   cost: number;
   whatsapp: string;
   patients: number[];
-  schedule: Schedule[];
+  schedules: Schedule[];
 };
 
 export type Patient = {
-  id: number;
   type: PatientType;
   title: PatientTitle;
 };
 
 export type Schedule = {
-  weekDay: WeekDay;
+  weekDay: number;
   fromTime: number;
   toTime: number;
 };

@@ -8,7 +8,6 @@ import {
   MainTitle,
   Select,
 } from "../../components";
-import { WeekDay } from "../../components/Caregiver/types";
 import { CaregiversWrapper, FormWrapper } from "../styles/CaregiversList";
 
 const Caregivers: NextPage = () => {
@@ -26,14 +25,69 @@ const Caregivers: NextPage = () => {
     whatsapp: "3187226636",
     bio: "Cuidadora com mais de oito anos de experiência. Atuou em casas de família e hospitais. Possui curso profissionalizante na área.",
     cost: 20,
-    schedule: [
+    schedules: [
+      // {
+      //   weekDay: 1,
+      //   fromTime: 8,
+      //   toTime: 23,
+      // },
+      // {
+      //   weekDay: 2,
+      //   fromTime: 8,
+      //   toTime: 18,
+      // },
+      // {
+      //   weekDay: 3,
+      //   fromTime: 8,
+      //   toTime: 23,
+      // },
+      // {
+      //   weekDay: 4,
+      //   fromTime: 8,
+      //   toTime: 18,
+      // },
+      // {
+      //   weekDay: 5,
+      //   fromTime: 8,
+      //   toTime: 23,
+      // },
+      // {
+      //   weekDay: 5,
+      //   fromTime: 8,
+      //   toTime: 18,
+      // },
       {
-        weekDay: "1" as WeekDay,
+        weekDay: 6,
         fromTime: 8,
         toTime: 23,
       },
+      {
+        weekDay: 6,
+        fromTime: 8,
+        toTime: 18,
+      },
+      {
+        weekDay: 6,
+        fromTime: 8,
+        toTime: 23,
+      },
+      {
+        weekDay: 6,
+        fromTime: 8,
+        toTime: 18,
+      },
+      {
+        weekDay: 6,
+        fromTime: 8,
+        toTime: 23,
+      },
+      {
+        weekDay: 6,
+        fromTime: 8,
+        toTime: 18,
+      },
     ],
-    patients: [4, 5, 6],
+    patients: [0, 1, 2, 3, 4, 5],
   };
 
   return (
