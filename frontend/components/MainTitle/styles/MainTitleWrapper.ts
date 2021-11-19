@@ -8,7 +8,7 @@ export const MainTitleWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 0 17.6rem;
+  padding: 4rem 17.6rem;
 
   background-color: var(--primary-2);
 
@@ -17,11 +17,6 @@ export const MainTitleWrapper = styled.div`
   h3 {
     font-size: 3.6rem;
     font-weight: 600;
-    margin: 0 0 1.6rem 0;
-  }
-
-  span {
-    font-size: 1.6rem;
-    font-weight: 400;
+    margin: 0;
   }
 `;

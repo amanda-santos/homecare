@@ -1,25 +1,19 @@
-import React, { useState } from "react";
-import { Select } from "../Select";
+import React, { ReactElement } from "react";
 
-import { MainTitleWrapper } from "./styles";
+import { MainTitleWrapper, Subtitle } from "./styles";
 
 type Props = {
   title: string;
   subtitle?: string;
-  showFilters?: boolean;
+  children?: ReactElement;
 };
 
-export const MainTitle = ({ title, subtitle, showFilters = false }: Props) => {
+export const MainTitle = ({ title, subtitle, children }: Props) => {
   return (
     <MainTitleWrapper>
       <h3>{title}</h3>
-      <span>{subtitle}</span>
-
-      <Select
-        name="blba"
-        label="vavavav"
-        options={[{ value: "bababa", label: "bebeb" }]}
-      />
+      <Subtitle>{subtitle}</Subtitle>
+      <div>{children}</div>
     </MainTitleWrapper>
   );
 };

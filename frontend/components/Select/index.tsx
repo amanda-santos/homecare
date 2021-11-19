@@ -1,5 +1,5 @@
 import React, { ReactElement, SelectHTMLAttributes } from "react";
-import { SelectWrapper } from "./Select";
+import { SelectWrapper } from "./styles";
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;

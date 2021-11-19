@@ -1,12 +1,77 @@
 import type { NextPage } from "next";
-import { Header, MainTitle } from "../../components";
-import { CaregiversWrapper } from "../styles/CaregiversList";
+import { useState } from "react";
+import {
+  Button,
+  Caregiver,
+  Header,
+  Input,
+  MainTitle,
+  Select,
+} from "../../components";
+import { WeekDay } from "../../components/Caregiver/types";
+import { CaregiversWrapper, FormWrapper } from "../styles/CaregiversList";
 
 const Caregivers: NextPage = () => {
+  const [weekDay, setWeekDay] = useState("");
+  const [time, setTime] = useState("");
+
+  const caregiver = {
+    id: 1,
+    firstName: "Maria",
+    lastName: "Silva",
+    city: "Ouro Branco",
+    state: "MG",
+    avatar:
+      "http://core360.com.br/shop/skin/adminhtml/default/default/lib/jlukic_semanticui/examples/assets/images/avatar/nan.jpg",
+    whatsapp: "3187226636",
+    bio: "Cuidadora com mais de oito anos de experiência. Atuou em casas de família e hospitais. Possui curso profissionalizante na área.",
+    cost: 20,
+    schedule: [
+      {
+        weekDay: "1" as WeekDay,
+        fromTime: 8,
+        toTime: 23,
+      },
+    ],
+    patients: [4, 5, 6],
+  };
+
   return (
     <CaregiversWrapper>
       <Header />
-      <MainTitle title="Estes são os cuidadores disponíveis." showFilters />
+      <MainTitle title="Estes são os cuidadores disponíveis.">
+        <FormWrapper>
+          <Select
+            name="weekDay"
+            label="Dia da semana"
+            value={weekDay}
+            onChange={(e) => {
+              setWeekDay(e.target.value);
+            }}
+            options={[
+              { value: "0", label: "Domingo" },
+              { value: "1", label: "Segunda-Feira" },
+              { value: "2", label: "Terça-Feira" },
+              { value: "3", label: "Quarta-Feira" },
+              { value: "4", label: "Quinta-Feira" },
+              { value: "5", label: "Sexta-Feira" },
+              { value: "6", label: "Sábado" },
+            ]}
+          />
+          <Input
+            type="time"
+            name="time"
+            label="Horário"
+            value={time}
+            onChange={(e) => {
+              setTime(e.target.value);
+            }}
+          />
+          <Button label="Buscar" type="submit" />
+        </FormWrapper>
+      </MainTitle>
+
+      <Caregiver caregiver={caregiver} />
     </CaregiversWrapper>
   );
 };
