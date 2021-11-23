@@ -9,7 +9,7 @@ export const Footer = styled.div`
   width: 82.4rem;
   height: 12rem;
 
-  padding: 6.4rem 9.6rem;
+  padding: 6.4rem 11.2rem 6.4rem 10.4rem;
 `;
 
 export const Cost = styled.div`
@@ -21,5 +21,12 @@ export const Cost = styled.div`
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--text-light);
+    margin-right: 0.8rem;
+  }
+
+  h4 {
+    font-size: 2.4rem;
+    color: var(--secondary);
+    font-weight: 800;
   }
 `;

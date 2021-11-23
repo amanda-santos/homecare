@@ -80,9 +80,19 @@ export const Caregiver = ({ caregiver }: Props) => {
       </CaregiverWrapper>
       <Footer>
         <Cost>
-          <span>Preço/hora</span> <h4>R$ {cost}</h4>
+          <span>Preço/hora</span>{" "}
+          <h4>
+            {cost.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </h4>
         </Cost>
-        <Button label="Entrar em contato"></Button>
+        <Button
+          label="Entrar em contato"
+          color="green"
+          icon="whatsapp"
+        ></Button>
       </Footer>
     </>
   );

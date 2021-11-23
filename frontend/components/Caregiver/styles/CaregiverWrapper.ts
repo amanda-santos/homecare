@@ -8,7 +8,7 @@ export const CaregiverWrapper = styled.div`
 
   background-color: var(--background);
   width: 82.4rem;
-  height: 73.8rem;
+  height: fit-content;
 
   margin-top: 6.4rem;
   padding: 6.4rem 9.6rem;

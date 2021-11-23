@@ -24,38 +24,38 @@ const Caregivers: NextPage = () => {
       "http://core360.com.br/shop/skin/adminhtml/default/default/lib/jlukic_semanticui/examples/assets/images/avatar/nan.jpg",
     whatsapp: "3187226636",
     bio: "Cuidadora com mais de oito anos de experiência. Atuou em casas de família e hospitais. Possui curso profissionalizante na área.",
-    cost: 20,
+    cost: 20.0,
     schedules: [
-      // {
-      //   weekDay: 1,
-      //   fromTime: 8,
-      //   toTime: 23,
-      // },
-      // {
-      //   weekDay: 2,
-      //   fromTime: 8,
-      //   toTime: 18,
-      // },
-      // {
-      //   weekDay: 3,
-      //   fromTime: 8,
-      //   toTime: 23,
-      // },
-      // {
-      //   weekDay: 4,
-      //   fromTime: 8,
-      //   toTime: 18,
-      // },
-      // {
-      //   weekDay: 5,
-      //   fromTime: 8,
-      //   toTime: 23,
-      // },
-      // {
-      //   weekDay: 5,
-      //   fromTime: 8,
-      //   toTime: 18,
-      // },
+      {
+        weekDay: 1,
+        fromTime: 8,
+        toTime: 23,
+      },
+      {
+        weekDay: 2,
+        fromTime: 8,
+        toTime: 18,
+      },
+      {
+        weekDay: 3,
+        fromTime: 8,
+        toTime: 23,
+      },
+      {
+        weekDay: 4,
+        fromTime: 8,
+        toTime: 18,
+      },
+      {
+        weekDay: 5,
+        fromTime: 8,
+        toTime: 23,
+      },
+      {
+        weekDay: 5,
+        fromTime: 8,
+        toTime: 18,
+      },
       {
         weekDay: 6,
         fromTime: 8,
@@ -121,10 +121,19 @@ const Caregivers: NextPage = () => {
               setTime(e.target.value);
             }}
           />
-          <Button label="Buscar" type="submit" />
+          <Button
+            label="Buscar"
+            color="secondary"
+            icon="arrow-right"
+            type="submit"
+          />
         </FormWrapper>
       </MainTitle>
 
+      <Caregiver caregiver={caregiver} />
+      <Caregiver caregiver={caregiver} />
+      <Caregiver caregiver={caregiver} />
+      <Caregiver caregiver={caregiver} />
       <Caregiver caregiver={caregiver} />
     </CaregiversWrapper>
   );

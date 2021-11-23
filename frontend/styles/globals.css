@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&family=Yeseva+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&family=Yeseva+One&display=swap");
 
 :root {
   --white: #fff;
@@ -8,21 +8,28 @@
   --text: #555555;
   --text-light: #777777;
   --light-grey-2: #e5e5ea;
-  --secondary: #ff5545;
   --primary: #69bcfc;
   --primary-2: #61aee8;
   --primary-3: #66b5f2;
-  --hover: #408dc9;
+  --primary-hover: #408dc9;
+  --secondary: #ff5545;
+  --secondary-hover: #dc4b3d;
+  --green: #04d361;
+  --green-hover: #39865c;
 }
 
 html,
-body {
+body,
+#__next {
   padding: 0;
   margin: 0;
+  height: 100vh;
+  width: 100vw;
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
   font-size: 62.5%;
   font-weight: 200;
+  overflow: auto;
 }
 
 a {

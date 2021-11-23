@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-export const ButtonWrapper = styled.button`
+export const ButtonWrapper = styled.button<{
+  $color: "primary" | "secondary" | "green";
+}>`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 2.4rem;
   width: 23.2rem;
   height: 4.8rem;
@@ -14,7 +16,7 @@ export const ButtonWrapper = styled.button`
 
   border: none;
   border-radius: 0.5rem;
-  background-color: var(--secondary);
+  background-color: ${({ $color }) => `var(--${$color})`};
   transition: all 500ms ease;
 
   span {
@@ -22,6 +24,6 @@ export const ButtonWrapper = styled.button`
   }
 
   &:hover {
-    background-color: #dc4b3d;
+    background-color: ${({ $color }) => `var(--${$color}-hover)`};
   }
 `;
