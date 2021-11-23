@@ -8,7 +8,8 @@ import {
   MainTitle,
   Select,
 } from "../../components";
-import { CaregiversWrapper, FormWrapper } from "../styles/CaregiversList";
+import { FormWrapper } from "../../styles/Pages/CaregiversList";
+import { MainContainer } from "../../styles/Pages/Commons";
 
 const Caregivers: NextPage = () => {
   const [weekDay, setWeekDay] = useState("");
@@ -91,7 +92,7 @@ const Caregivers: NextPage = () => {
   };
 
   return (
-    <CaregiversWrapper>
+    <MainContainer>
       <Header />
       <MainTitle title="Estes são os cuidadores disponíveis.">
         <FormWrapper>
@@ -135,7 +136,7 @@ const Caregivers: NextPage = () => {
       <Caregiver caregiver={caregiver} />
       <Caregiver caregiver={caregiver} />
       <Caregiver caregiver={caregiver} />
-    </CaregiversWrapper>
+    </MainContainer>
   );
 };
 

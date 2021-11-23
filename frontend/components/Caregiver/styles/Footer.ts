@@ -5,6 +5,7 @@ export const Footer = styled.div`
   align-items: center;
   justify-content: space-between;
   border-top: 0.1rem solid var(--light-grey-2);
+  border-radius: 0.8rem;
   background-color: var(--background);
   width: 82.4rem;
   height: 12rem;

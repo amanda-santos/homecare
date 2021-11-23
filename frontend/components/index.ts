@@ -1,5 +1,7 @@
 export { Button } from "./Button";
 export { Caregiver } from "./Caregiver";
+export { CaregiverForm } from "./CaregiverForm";
+export { Checkbox } from "./Checkbox";
 export { Header } from "./Header";
 export { HomeButton } from "./HomeButton";
 export { Input } from "./Input";

@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-type Props = {
-  $color: "primary" | "secondary";
-};
-
-export const Button = styled.button<Props>`
+export const Button = styled.button<{ $color: "primary" | "secondary" }>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;

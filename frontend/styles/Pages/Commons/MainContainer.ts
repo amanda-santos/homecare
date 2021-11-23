@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CaregiversWrapper = styled.div`
+export const MainContainer = styled.div`
   overflow-x: hidden;
   box-sizing: border-box;
   display: flex;

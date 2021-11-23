@@ -1,26 +1,29 @@
 import styled from "styled-components";
 
-export const InputWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
+export const FieldsWrapper = styled.div<{ $columns: number }>`
   width: 100%;
+  display: grid;
+  grid-template-columns: ${({ $columns }) =>
+    $columns === 1 ? "1fr" : "1fr  1fr"};
+  gap: 1.6rem;
+  margin-top: 1.6rem;
 
   label {
     font-size: 1.4rem;
     font-weight: 400;
     color: var(--text-light);
+    margin: 0;
   }
 
-  input {
+  textarea {
     width: 100%;
-    height: 4.8rem;
-    margin-top: 0.8rem;
+    margin: 0;
+    height: 10.4rem;
+    padding: 1.2rem;
     border-radius: 0.5rem;
     background: var(--background);
     border: 1px solid var(--background-2);
     outline: 0;
-    padding: 0 1.2rem;
 
     font-size: 1.4rem;
     font-family: "Nunito", sans-serif;

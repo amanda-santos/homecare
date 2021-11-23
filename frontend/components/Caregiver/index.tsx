@@ -39,7 +39,6 @@ export const Caregiver = ({ caregiver }: Props) => {
     patients,
     schedules,
   } = caregiver;
-  console.log(PatientType[2], PatientTitle[4]);
   return (
     <>
       <CaregiverWrapper>
@@ -88,11 +87,13 @@ export const Caregiver = ({ caregiver }: Props) => {
             })}
           </h4>
         </Cost>
-        <Button
-          label="Entrar em contato"
-          color="green"
-          icon="whatsapp"
-        ></Button>
+        <a
+          href={`https://wa.me/${whatsapp}?text=Olá!%20Tenho%20interesse%20nos%20seus%20serviços.%20Podemos%20conversar?`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Button label="Entrar em contato" color="green" icon="whatsapp" />
+        </a>
       </Footer>
     </>
   );
