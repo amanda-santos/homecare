@@ -4,9 +4,9 @@ export const FieldsWrapper = styled.div<{ $columns: number }>`
   width: 100%;
   display: grid;
   grid-template-columns: ${({ $columns }) =>
-    $columns === 1 ? "1fr" : "1fr  1fr"};
+    $columns === 1 ? "1fr" : $columns === 2 ? "1fr  1fr" : "1fr 1fr 1fr"};
   gap: 1.6rem;
-  margin-top: 1.6rem;
+  margin-top: 2.4rem;
 
   label {
     font-size: 1.4rem;

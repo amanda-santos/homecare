@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.div<{ $labelColor: "white" | "text-light" }>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@ export const InputWrapper = styled.div`
   label {
     font-size: 1.4rem;
     font-weight: 400;
-    color: var(--text-light);
+    color: ${({ $labelColor }) => `var(--${$labelColor})`};
   }
 
   input {

@@ -5,13 +5,13 @@ import { ButtonWrapper } from "./styles";
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   color: "primary" | "secondary" | "green";
-  icon: "arrow-right" | "whatsapp";
+  icon?: "arrow-right" | "whatsapp";
 }
 
 export const Button = ({ label, color, icon }: Props) => {
   return (
     <ButtonWrapper $color={color}>
-      {icon === "whatsapp" && (
+      {icon && icon === "whatsapp" && (
         <span>
           <Image
             src="/images/whatsapp.svg"
@@ -22,7 +22,7 @@ export const Button = ({ label, color, icon }: Props) => {
         </span>
       )}
       {label}
-      {icon === "arrow-right" && (
+      {icon && icon === "arrow-right" && (
         <span>
           <Image
             src="/images/chevron-right.svg"

@@ -15,8 +15,7 @@ export const Button = styled.button<{ $color: "primary" | "secondary" }>`
 
   border: none;
   border-radius: 0.5rem;
-  background-color: ${({ $color }) =>
-    $color === "primary" ? "var(--primary)" : "var(--secondary)"};
+  background-color: ${({ $color }) => `var(--${$color})`};
   transition: all 500ms ease;
 
   span {
@@ -30,14 +29,11 @@ export const Button = styled.button<{ $color: "primary" | "secondary" }>`
 
   &:hover {
     background-color: var(--white);
-    box-shadow: 0 0 0 2px
-      ${({ $color }) =>
-        $color === "primary" ? "var(--primary)" : "var(--secondary)"};
+    box-shadow: 0 0 0 2px ${({ $color }) => `var(--${$color})`};
 
     p,
     span {
-      color: ${({ $color }) =>
-        $color === "primary" ? "var(--primary)" : "var(--secondary)"};
+      color: ${({ $color }) => `var(--${$color})`};
     }
   }
 `;

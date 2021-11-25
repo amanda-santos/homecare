@@ -4,6 +4,7 @@ import { SelectWrapper } from "./styles";
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   label: string;
+  labelColor?: "white" | "text-light";
   options: Array<{
     value: string;
     label: string;
@@ -13,11 +14,12 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
 export const Select = ({
   name,
   label,
+  labelColor = "text-light",
   options,
   ...rest
 }: Props): ReactElement => {
   return (
-    <SelectWrapper>
+    <SelectWrapper $labelColor={labelColor}>
       <label htmlFor={name}>{label}</label>
       <select value="" id={name} {...rest}>
         <option value="" disabled hidden>

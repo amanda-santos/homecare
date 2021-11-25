@@ -13,12 +13,9 @@ export const InputWrapper = styled.div`
   }
 
   input[type="checkbox"] {
-    /* Add if not using autoprefixer */
     -webkit-appearance: none;
     appearance: none;
-    /* For iOS < 15 to remove gradient background */
     background-color: var(--background-2);
-    /* Not removed via appearance */
     margin: 0;
     font: inherit;
     color: var(--background-2);

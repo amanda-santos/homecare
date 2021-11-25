@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
-export const SelectWrapper = styled.div`
+export const SelectWrapper = styled.div<{
+  $labelColor: "white" | "text-light";
+}>`
   position: relative;
   display: flex;
   flex-direction: column;
 
   label {
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: ${({ $labelColor }) => `var(--${$labelColor})`};
   }
 
   select {
@@ -24,7 +27,7 @@ export const SelectWrapper = styled.div`
     outline: 0;
     padding: 0 1.2rem;
 
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-family: "Nunito", sans-serif;
     color: var(--text);
   }

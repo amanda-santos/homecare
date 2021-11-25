@@ -99,6 +99,7 @@ const Caregivers: NextPage = () => {
           <Select
             name="weekDay"
             label="Dia da semana"
+            labelColor="white"
             value={weekDay}
             onChange={(e) => {
               setWeekDay(e.target.value);
@@ -117,6 +118,7 @@ const Caregivers: NextPage = () => {
             type="time"
             name="time"
             label="Horário"
+            labelColor="white"
             value={time}
             onChange={(e) => {
               setTime(e.target.value);

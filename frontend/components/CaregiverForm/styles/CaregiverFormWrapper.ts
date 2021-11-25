@@ -18,6 +18,9 @@ export const CaregiverFormWrapper = styled.form`
   hr {
     border-top: 1px solid var(--color-separator);
     width: 100%;
-    margin-bottom: 1.6rem;
+  }
+
+  span {
+    font-size: 1.4rem;
   }
 `;
