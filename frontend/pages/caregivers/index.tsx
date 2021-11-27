@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { InferGetServerSidePropsType } from "next";
 import { useState } from "react";
 import {
   Button,
@@ -8,12 +8,44 @@ import {
   MainTitle,
   Select,
 } from "../../components";
+import { Caregiver as CaregiverType } from "../../components/Caregiver/types";
+import api from "../../services/api";
 import { FormWrapper } from "../../styles/Pages/CaregiversList";
 import { MainContainer } from "../../styles/Pages/Commons";
 
-const Caregivers: NextPage = () => {
+export const getServerSideProps = async () => {
+  // const getPatients = async (id: CaregiverType["id"]) => {
+  //   const response = await api.get(`caregivers/${id}/patients`);
+  //   return response.data;
+  // };
+
+  // const getSchedule = async (id: CaregiverType["id"]) => {
+  //   const response = await api.get(`caregivers/${id}/schedule`);
+  //   return response.data;
+  // };
+
+  const response = await api.get("caregivers", {
+    // params: {
+    //   subject,
+    //   week_day,
+    //   time,
+    // }
+  });
+
+  return {
+    props: {
+      data: response.data,
+    },
+  };
+};
+
+const Caregivers = ({
+  data,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [caregivers, setCaregivers] = useState(data);
   const [weekDay, setWeekDay] = useState("");
   const [time, setTime] = useState("");
+  console.log(caregivers);
 
   const caregiver = {
     id: 1,
@@ -132,12 +164,9 @@ const Caregivers: NextPage = () => {
           />
         </FormWrapper>
       </MainTitle>
-
-      <Caregiver caregiver={caregiver} />
-      <Caregiver caregiver={caregiver} />
-      <Caregiver caregiver={caregiver} />
-      <Caregiver caregiver={caregiver} />
-      <Caregiver caregiver={caregiver} />
+      {/* {caregivers.map((caregiver: CaregiverType) => (
+        <Caregiver key={caregiver.id} caregiver={caregiver} />
+      ))} */}
     </MainContainer>
   );
 };
