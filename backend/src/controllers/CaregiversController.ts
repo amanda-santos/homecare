@@ -11,6 +11,27 @@ interface ScheduleItem {
   from_time: string;
   to_time: string;
 }
+const getPatients = async (id: number) => {
+  const patientsResult = await db("users")
+    .select("patient_id")
+    .from("caregiver_patient")
+    .where("caregiver_id", id);
+  return patientsResult.map((res) => res.patient_id);
+};
+
+const getSchedule = async (id: number) => {
+  const scheduleResult = await db("users")
+    .select("week_day", "from_time", "to_time")
+    .from("caregiver_schedule")
+    .where("caregiver_id", id);
+  return scheduleResult.map((scheduleObject) => {
+    return {
+      ...scheduleObject,
+      from_time: convertMinutesToHoursMinutes(scheduleObject.from_time),
+      to_time: convertMinutesToHoursMinutes(scheduleObject.to_time),
+    };
+  });
+};
 
 export default class CaregiversController {
   async index(request: Request, response: Response) {
@@ -19,7 +40,7 @@ export default class CaregiversController {
     const patientsString = (filters.patients as string)
       ?.replace(/\[|\]/g, "")
       .split(",");
-    const patients = patientsString.map(Number);
+    const patients = patientsString?.map(Number);
     const week_day = filters.week_day as string;
     const time = filters.time as string;
 
@@ -55,39 +76,30 @@ export default class CaregiversController {
       })
       .select("caregivers.id as caregiverId", "users.*");
 
-    return response.send(result);
+    const caregivers = await Promise.all(
+      result.map(async (caregiver) => {
+        const patients = await getPatients(caregiver.id);
+        const schedule = await getSchedule(caregiver.id);
+
+        return {
+          ...caregiver,
+          patients,
+          schedule,
+        };
+      })
+    );
+
+    return response.send(caregivers);
   }
 
   async indexPatients(request: Request, response: Response) {
     const id = request.params.id;
-
-    const result = await db("users")
-      .select("patient_id")
-      .from("caregiver_patient")
-      .where("caregiver_id", parseInt(id));
-
-    const patients = result.map((res) => res.patient_id);
-
-    return response.send(patients);
+    return response.send(await getPatients(parseInt(id)));
   }
 
   async indexSchedule(request: Request, response: Response) {
     const id = request.params.id;
-
-    const schedule = await db("users")
-      .select("week_day", "from_time", "to_time")
-      .from("caregiver_schedule")
-      .where("caregiver_id", parseInt(id));
-
-    const formattedSchedule = schedule.map((scheduleObject) => {
-      return {
-        ...scheduleObject,
-        from_time: convertMinutesToHoursMinutes(scheduleObject.from_time),
-        to_time: convertMinutesToHoursMinutes(scheduleObject.to_time),
-      };
-    });
-
-    return response.send(formattedSchedule);
+    return response.send(await getSchedule(parseInt(id)));
   }
 
   async create(request: Request, response: Response) {
