@@ -37,7 +37,7 @@ export const Caregiver = ({ caregiver }: Props) => {
     cost,
     whatsapp,
     patients,
-    schedules,
+    schedule,
   } = caregiver;
   return (
     <>
@@ -57,7 +57,7 @@ export const Caregiver = ({ caregiver }: Props) => {
         <Bio>{bio}</Bio>
 
         <PatientsWrapper>
-          {patients.map((patient: number) => (
+          {patients?.map((patient: number) => (
             <Patient
               key={patient}
               title={PatientTitle[patient]}
@@ -67,7 +67,7 @@ export const Caregiver = ({ caregiver }: Props) => {
         </PatientsWrapper>
 
         <SchedulesWrapper>
-          {schedules.map((schedule: ScheduleType, index: number) => (
+          {schedule?.map((schedule: ScheduleType, index: number) => (
             <Schedule
               key={index}
               weekDay={WeekDay[schedule.weekDay]}
@@ -81,7 +81,7 @@ export const Caregiver = ({ caregiver }: Props) => {
         <Cost>
           <span>Preço/hora</span>{" "}
           <h4>
-            {cost.toLocaleString("pt-br", {
+            {cost?.toLocaleString("pt-br", {
               style: "currency",
               currency: "BRL",
             })}

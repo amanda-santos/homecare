@@ -1,5 +1,4 @@
-import type { InferGetServerSidePropsType } from "next";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import {
   Button,
   Caregiver,
@@ -13,24 +12,12 @@ import api from "../../services/api";
 import { FormWrapper } from "../../styles/Pages/CaregiversList";
 import { MainContainer } from "../../styles/Pages/Commons";
 
+type Props = {
+  data: CaregiverType[];
+};
+
 export const getServerSideProps = async () => {
-  // const getPatients = async (id: CaregiverType["id"]) => {
-  //   const response = await api.get(`caregivers/${id}/patients`);
-  //   return response.data;
-  // };
-
-  // const getSchedule = async (id: CaregiverType["id"]) => {
-  //   const response = await api.get(`caregivers/${id}/schedule`);
-  //   return response.data;
-  // };
-
-  const response = await api.get("caregivers", {
-    // params: {
-    //   subject,
-    //   week_day,
-    //   time,
-    // }
-  });
+  const response = await api.get("caregivers");
 
   return {
     props: {
@@ -39,95 +26,28 @@ export const getServerSideProps = async () => {
   };
 };
 
-const Caregivers = ({
-  data,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Caregivers = ({ data }: Props) => {
   const [caregivers, setCaregivers] = useState(data);
   const [weekDay, setWeekDay] = useState("");
   const [time, setTime] = useState("");
-  console.log(caregivers);
 
-  const caregiver = {
-    id: 1,
-    firstName: "Maria",
-    lastName: "Silva",
-    city: "Ouro Branco",
-    state: "MG",
-    avatar:
-      "http://core360.com.br/shop/skin/adminhtml/default/default/lib/jlukic_semanticui/examples/assets/images/avatar/nan.jpg",
-    whatsapp: "3187226636",
-    bio: "Cuidadora com mais de oito anos de experiência. Atuou em casas de família e hospitais. Possui curso profissionalizante na área.",
-    cost: 20.0,
-    schedules: [
-      {
-        weekDay: 1,
-        fromTime: 8,
-        toTime: 23,
+  const searchCaregivers = async (e: FormEvent) => {
+    e.preventDefault();
+    const response = await api.get("caregivers", {
+      params: {
+        week_day: weekDay,
+        time,
       },
-      {
-        weekDay: 2,
-        fromTime: 8,
-        toTime: 18,
-      },
-      {
-        weekDay: 3,
-        fromTime: 8,
-        toTime: 23,
-      },
-      {
-        weekDay: 4,
-        fromTime: 8,
-        toTime: 18,
-      },
-      {
-        weekDay: 5,
-        fromTime: 8,
-        toTime: 23,
-      },
-      {
-        weekDay: 5,
-        fromTime: 8,
-        toTime: 18,
-      },
-      {
-        weekDay: 6,
-        fromTime: 8,
-        toTime: 23,
-      },
-      {
-        weekDay: 6,
-        fromTime: 8,
-        toTime: 18,
-      },
-      {
-        weekDay: 6,
-        fromTime: 8,
-        toTime: 23,
-      },
-      {
-        weekDay: 6,
-        fromTime: 8,
-        toTime: 18,
-      },
-      {
-        weekDay: 6,
-        fromTime: 8,
-        toTime: 23,
-      },
-      {
-        weekDay: 6,
-        fromTime: 8,
-        toTime: 18,
-      },
-    ],
-    patients: [0, 1, 2, 3, 4, 5],
+    });
+
+    setCaregivers(response.data);
   };
 
   return (
     <MainContainer>
       <Header />
       <MainTitle title="Estes são os cuidadores disponíveis.">
-        <FormWrapper>
+        <FormWrapper onSubmit={searchCaregivers}>
           <Select
             name="weekDay"
             label="Dia da semana"
@@ -164,9 +84,9 @@ const Caregivers = ({
           />
         </FormWrapper>
       </MainTitle>
-      {/* {caregivers.map((caregiver: CaregiverType) => (
+      {caregivers?.map((caregiver: CaregiverType) => (
         <Caregiver key={caregiver.id} caregiver={caregiver} />
-      ))} */}
+      ))}
     </MainContainer>
   );
 };

@@ -46,7 +46,7 @@ export type Caregiver = {
   cost: number;
   whatsapp: string;
   patients: number[];
-  schedules: Schedule[];
+  schedule: Schedule[];
 };
 
 export type Patient = {
