@@ -8,3 +8,4 @@ export { Input } from "./Input";
 export { Logo } from "./Logo";
 export { MainTitle } from "./MainTitle";
 export { Select } from "./Select";
+export { TextArea } from "./TextArea";

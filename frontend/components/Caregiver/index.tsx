@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { Button } from "..";
+import api from "../../services/api";
 import { Patient } from "../Patient";
 import { Schedule } from "../Schedule";
 import {
@@ -16,10 +17,10 @@ import {
 import {
   Caregiver as CaregiverType,
   PatientEmoji,
+  PatientShortTitle,
   Schedule as ScheduleType,
   WeekDay,
-} from "./types";
-import { PatientTitle, PatientType } from "./types";
+} from "../../commons/types";
 
 type Props = {
   caregiver: CaregiverType;
@@ -39,6 +40,13 @@ export const Caregiver = ({ caregiver }: Props) => {
     patients,
     schedule,
   } = caregiver;
+
+  const handleCreateConnection = () => {
+    api.post("connections", {
+      user_id: id,
+    });
+  };
+
   return (
     <>
       <CaregiverWrapper>
@@ -60,7 +68,7 @@ export const Caregiver = ({ caregiver }: Props) => {
           {patients?.map((patient: number) => (
             <Patient
               key={patient}
-              title={PatientTitle[patient]}
+              title={PatientShortTitle[patient]}
               emoji={PatientEmoji[patient]}
             />
           ))}
@@ -88,9 +96,10 @@ export const Caregiver = ({ caregiver }: Props) => {
           </h4>
         </Cost>
         <a
-          href={`https://wa.me/${whatsapp}?text=Olá!%20Tenho%20interesse%20nos%20seus%20serviços.%20Podemos%20conversar?`}
+          href={`https://wa.me/55${whatsapp}?text=Olá!%20Tenho%20interesse%20nos%20seus%20serviços.%20Podemos%20conversar?`}
           target="_blank"
           rel="noreferrer"
+          onClick={handleCreateConnection}
         >
           <Button label="Entrar em contato" color="green" icon="whatsapp" />
         </a>

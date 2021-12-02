@@ -26,9 +26,9 @@ const getSchedule = async (id: number) => {
     .where("caregiver_id", id);
   return scheduleResult.map((scheduleObject) => {
     return {
-      ...scheduleObject,
-      from_time: convertMinutesToHoursMinutes(scheduleObject.from_time),
-      to_time: convertMinutesToHoursMinutes(scheduleObject.to_time),
+      weekDay: scheduleObject.week_day,
+      fromTime: convertMinutesToHoursMinutes(scheduleObject.from_time),
+      toTime: convertMinutesToHoursMinutes(scheduleObject.to_time),
     };
   });
 };
@@ -36,47 +36,43 @@ const getSchedule = async (id: number) => {
 export default class CaregiversController {
   async index(request: Request, response: Response) {
     const filters = request.query;
+    const week_day = filters?.week_day as string;
+    const time = filters?.time as string;
 
-    const patientsString = (filters.patients as string)
-      ?.replace(/\[|\]/g, "")
-      .split(",");
-    const patients = patientsString?.map(Number);
-    const week_day = filters.week_day as string;
-    const time = filters.time as string;
+    let result = [];
+    let caregivers = [];
 
-    if (!filters.week_day && !filters.patients && !filters.time) {
-      const caregivers = await db("caregivers")
+    if (!filters.week_day && !filters.time) {
+      result = await db("caregivers")
         .join("users", "caregivers.user_id", "=", "users.id")
         .select(["caregivers.*", "users.*"]);
-
-      return response.send(caregivers);
-    } else if (!filters.week_day || !filters.patients || !filters.time) {
+    } else if (!filters.week_day || !filters.time) {
       return response.status(400).json({
         error: "Missing filters to search for caregivers.",
       });
+    } else {
+      const timeInMinutes = convertHourToMinutes(time);
+
+      result = await db("users")
+        .innerJoin("caregivers", "users.id", "caregivers.user_id")
+        .whereExists(function () {
+          this.select("*")
+            .from("caregiver_patient")
+            .whereIn("patient_id", [0, 1, 2, 3, 4, 5])
+            .where("caregiver_id", db.ref("caregivers.user_id"));
+        })
+        .whereExists(function () {
+          this.select("*")
+            .from("caregiver_schedule")
+            .where("caregiver_schedule.week_day", Number(week_day))
+            .where("caregiver_schedule.from_time", "<=", timeInMinutes)
+            .where("caregiver_schedule.to_time", ">", timeInMinutes)
+            .where("caregiver_id", db.ref("caregivers.user_id"));
+        })
+        .select("caregivers.id as caregiverId", "users.*", "caregivers.cost");
     }
 
-    const timeInMinutes = convertHourToMinutes(time);
-
-    const result = await db("users")
-      .innerJoin("caregivers", "users.id", "caregivers.user_id")
-      .whereExists(function () {
-        this.select("*")
-          .from("caregiver_patient")
-          .whereIn("patient_id", patients)
-          .where("caregiver_id", db.ref("caregivers.user_id"));
-      })
-      .whereExists(function () {
-        this.select("*")
-          .from("caregiver_schedule")
-          .where("caregiver_schedule.week_day", Number(week_day))
-          .where("caregiver_schedule.from_time", "<=", timeInMinutes)
-          .where("caregiver_schedule.to_time", ">", timeInMinutes)
-          .where("caregiver_id", db.ref("caregivers.user_id"));
-      })
-      .select("caregivers.id as caregiverId", "users.*");
-
-    const caregivers = await Promise.all(
+    caregivers = await Promise.all(
       result.map(async (caregiver) => {
         const patients = await getPatients(caregiver.id);
         const schedule = await getSchedule(caregiver.id);

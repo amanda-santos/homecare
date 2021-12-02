@@ -7,7 +7,7 @@ import {
   MainTitle,
   Select,
 } from "../../components";
-import { Caregiver as CaregiverType } from "../../components/Caregiver/types";
+import { Caregiver as CaregiverType } from "../../commons/types";
 import api from "../../services/api";
 import { FormWrapper } from "../../styles/Pages/CaregiversList";
 import { MainContainer } from "../../styles/Pages/Commons";

@@ -1,10 +1,8 @@
 import Knex from "knex";
 
-// quais alterações queremos fazer no banco
 export async function up(knex: Knex) {
   return knex.schema.createTable("caregivers", (table) => {
     table.increments("id").primary();
-    // table.string('subject').notNullable();
     table.decimal("cost").notNullable();
 
     table
@@ -17,7 +15,6 @@ export async function up(knex: Knex) {
   });
 }
 
-// se der problema, o que deve ser desfeito
 export async function down(knex: Knex) {
   return knex.schema.dropTable("caregivers");
 }
