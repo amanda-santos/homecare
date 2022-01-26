@@ -38,7 +38,6 @@
 ## 👩🏻‍💻 Technologies
 
 Technologies used to develop this project:
-
 - Next.js
 - React
 - React Native
@@ -48,7 +47,6 @@ Technologies used to develop this project:
 - Node.js
 - Knex
 - SQLite
-
 - NestJS (partially - only experimental)
 
 ## 🖥 Preview
