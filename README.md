@@ -73,8 +73,9 @@ Running the frontend (mobile):
 - Run with `expo start`
 
 ## 🖥 Preview
+https://user-images.githubusercontent.com/49074930/151217875-30a7db45-4f84-4baa-b263-4758cd336ed8.mp4
 
-📖
+https://user-images.githubusercontent.com/49074930/151217880-34b5067e-7f8f-49b9-94e8-a2d7e0fb2e82.mp4
 
 ## 🤔 How to contribute
 
